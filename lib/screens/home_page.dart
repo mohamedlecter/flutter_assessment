@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       DateTime time = DateTime.parse(contact['check-in']);
                       return ListTile(
                         leading: IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.share,
                             color: Colors.teal,
                           ),
