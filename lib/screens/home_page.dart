@@ -7,17 +7,18 @@ import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   HomeScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   List contactList = [];
-  List _displayList = [];
   bool isTimeAgo = true;
   bool isLoading = true;
 
@@ -34,7 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       });
     }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (contactList.isEmpty) {
                   contactList = json.decode(snapshot.data.toString());
                 }
-                contactList!.sort((b, a) {
+                contactList.sort((b, a) {
                   return (a['check-in']).compareTo(b['check-in']);
                 });
                 // sortList(contactList);
@@ -103,13 +103,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       // ignore: avoid_print
                       print(contactList);
                     });
-                    // ignore: prefer_const_constructors
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text(
-                        'Page Refreshed',
-                        textAlign: TextAlign.center,
-                      ),
-                    ));
                   },
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
@@ -123,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: const Text(
-                              ' You have reached the end of the list ',
+                              'You have reached the end of the list',
                             ),
                           ),
                         );
@@ -132,20 +125,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       DateTime time = DateTime.parse(contact['check-in']);
                       return ListTile(
                         leading: IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.share,
                             color: Colors.teal,
                           ),
                           onPressed: () {
-                            Share.share(contact[snapshot].toString());
+                            Share.share(contact.toString());
                           },
                         ),
                         title: Text(contact['user']),
                         subtitle: Text(contact['phone']),
                         trailing: Text(
                           isTimeAgo ? Jiffy(time).fromNow() : time.toString(),
-                          style: TextStyle(
-                            color: Colors.grey[700],
+                          style: const TextStyle(
+                            color: Colors.black,
                           ),
                         ),
                       );
